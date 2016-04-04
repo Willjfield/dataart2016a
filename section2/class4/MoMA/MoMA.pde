@@ -1,6 +1,8 @@
-String dataPath = "/Users/jerthorp/Downloads/collection-master/Artworks.json";
+String dataPath = "/Users/willjfield/Desktop/Projects/ITP/Spring2016/DArt/Artworks.json";
 
 ArrayList<Artwork> allArtworks = new ArrayList();
+ArrayList<Artwork> displayArtworks = new ArrayList();
+
 ArrayList<Artist> allArtists = new ArrayList();
 
 HashMap<String, Artist> artistMap = new HashMap();
@@ -19,18 +21,32 @@ void setup() {
    }
    }
    */
+   background(0);
+   
+   for(int i =0;i<allArtworks.size();i++){
+    Artwork aw = allArtworks.get(i);
+    float x = map(aw.year, 1900, 2016,0,width);
+    pushMatrix();
+      translate(x,height/2);
+      aw.render();
+    popMatrix();
+  }
+  
 }
 
 void draw() {
-  background(0);
+  
   //for(Artwork aw:allArtworks) aw.render();
+  /*
   randomSeed(0);
   for (int i = 0; i < 30; i++) {
     int r = floor(random(allArtists.size()));
     Artist dude = allArtists.get(r);
     dude.pos.set(random(width), random(height));
     dude.render();
-  }
+  }*/
+  
+  
 }
 
 
@@ -42,7 +58,7 @@ void loadData() {
     JSONObject j = data.getJSONObject(i);
     Artwork aw = new Artwork().fromJSON(j);
     //Give the artworks a random position relatie to their artist
-    aw.pos.set(random(-50, 50), random(-50, 50));
+    //aw.pos.set(random(-50, 50), random(-50, 50));
     allArtworks.add(aw);
 
     //Make the artist object if necessary
