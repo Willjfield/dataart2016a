@@ -28,7 +28,14 @@ class NetworkWord {
     if (displayWords.contains(nw)) {
       strokeWeight(sqrt(linkMap.get(w)) * 0.5);
       stroke(0,150);
-      line(pos.x,pos.y, nw.pos.x, nw.pos.y);
+      PVector center = new PVector(0,0);
+      PVector a1 = new PVector(pos.x,pos.y);
+      PVector a2 = new PVector(nw.pos.x,nw.pos.y);
+      PVector cp1 = a1.lerp(center,0.5);
+      PVector cp2 = a2.lerp(center,0.5);
+      noFill();
+      bezier(pos.x,pos.y,cp1.x,cp1.y,cp2.x,cp2.y,nw.pos.x,nw.pos.y);
+      //line(pos.x,pos.y, nw.pos.x, nw.pos.y);
     }
    } 
   }
